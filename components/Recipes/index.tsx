@@ -2,9 +2,9 @@ import { Badge, Box, Center, Divider, Icon, Image, Stack, Text, Tooltip } from "
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { IngredientsProps } from "../../types/interfaces";
 
-const Recipe = ({ res }: any) => {
+const Recipe = ({ res, setRecipe }: any) => {
   return (
-    <Box bg="brand.card" borderRadius={"md"}>
+    <Box bg="brand.card" borderRadius={"md"} onClick={() => setRecipe(res)}>
       <Box height="10rem" overflow={"hidden"} borderRadius={"md"}>
         <Image src={res.image} objectFit="cover" transition=".2s all" _hover={{ transform: "scale(1.08)" }} />
       </Box>
@@ -19,8 +19,8 @@ const Recipe = ({ res }: any) => {
             <Text as="small" fontWeight={500}>
               {res.time}
             </Text>
-          </Stack>
           <Stack direction="row" spacing={1}>
+          </Stack>
             {res.ingredients.map((name: IngredientsProps, i: number) => (
               <Tooltip label={name.alt} aria-label="a tooltip" key={i}>
                 <Badge variant={"subtle"} colorScheme="green" fontSize={"1rem"} borderRadius={"full"}>
