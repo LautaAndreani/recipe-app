@@ -4,15 +4,16 @@ import { MainProps } from "../types/interfaces";
 interface Props {
   mock: MainProps[];
   setRecipe: any;
+  onOpen: any;
 }
 
-const MainContent = ({ mock, setRecipe }: Props) => {
+const MainContent = ({ mock, setRecipe, onOpen }: Props) => {
   return (
     <>
       <Stack justifyContent="center" direction="row" flexWrap="wrap" mt={7}>
         <Grid gridGap={6} templateColumns="repeat(auto-fill, minmax(240px, 1fr))">
           {mock.map((res) => (
-            <Recipe res={res} key={res.id} setRecipe={setRecipe}  />
+            <Recipe res={res} key={res.id} setRecipe={setRecipe} onOpen={onOpen} />
           ))}
         </Grid>
       </Stack>

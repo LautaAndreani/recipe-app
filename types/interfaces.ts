@@ -18,4 +18,5 @@ export interface MainProps {
 export interface IngredientsProps {
   name: string;
   alt: string;
+  cantidad: string | number;
 }
