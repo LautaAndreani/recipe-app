@@ -25,14 +25,7 @@ const NavBar = () => {
       <Stack>
         <InputGroup>
           <InputLeftElement children={<Search2Icon />} />
-          <Input
-            width="26rem"
-            type="text"
-            border="1px solid"
-            borderColor="brand.text"
-            placeholder="Buscar por receta, ingredientes o palabras claves"
-            _placeholder={{ color: "brand.border", fontWeight: 500 }}
-          />
+          <Input width="26rem" type="text" border="1px solid" borderColor="brand.text" placeholder="Buscar por receta, ingredientes o palabras claves" _placeholder={{ color: "brand.border", fontWeight: 500 }} />
         </InputGroup>
       </Stack>
     </Stack>

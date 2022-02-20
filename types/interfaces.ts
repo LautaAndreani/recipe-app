@@ -20,3 +20,9 @@ export interface IngredientsProps {
   alt: string;
   cantidad: string | number;
 }
+
+//Add recipe
+export interface AddProps {
+  onClose: () => void;
+  isOpen: boolean;
+}

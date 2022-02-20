@@ -9,20 +9,7 @@ const Filter = () => {
   return (
     <Center alignItems="center" justifyContent={"center"} margin="0 auto" textAlign={"center"}>
       <Box>
-        <Box
-          as="span"
-          fontWeight={600}
-          margin={"0 1rem"}
-          marginTop={5}
-          display="flex"
-          alignItems={"center"}
-          justifyContent="center"
-          height="2rem"
-          padding={5}
-          borderRadius="md"
-          cursor="pointer"
-          _hover={{}}
-        >
+        <Box as="span" fontWeight={600} margin={"0 1rem"} marginTop={5} display="flex" alignItems={"center"} justifyContent="center" height="2rem" padding={5} borderRadius="md" _hover={{}}>
           Filtrar por
           <Icon as={BsFilter} marginTop={1} marginLeft={2} />
         </Box>

@@ -1,16 +1,20 @@
-import { useState } from "react";
-import type { NextPage } from "next";
-
-import { Box, useDisclosure } from "@chakra-ui/react";
+import React, { useState } from "react";
+import type { GetStaticProps, NextPage } from "next";
 import NavBar from "../ui/NavBar";
 import Filter from "../ui/Filter";
 import MainContent from "../ui/MainContent";
 import mock from "../mock";
-import AddRecipe from "../components/AddRecipe";
+import AddRecipe from "../components/AddRecipe/AddRecipe";
 import ViewRecipes from "../components/ViewRecipes";
 import { MainProps } from "../types/interfaces";
+import api from "../api";
 
-const Home: NextPage = () => {
+import { Box, useDisclosure } from "@chakra-ui/react";
+
+const Home: NextPage = ({ data }: any) => {
+  // console.log(data);
+
+  React.useLayoutEffect = React.useEffect;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [recipe, setRecipe] = useState<MainProps>();
 
@@ -26,3 +30,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   const data = await api.recipes();
+//   return {
+//     props: { data },
+//   };
+// };

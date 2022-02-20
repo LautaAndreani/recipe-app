@@ -1,6 +1,6 @@
 import { Badge, Box, Center, Divider, Flex, Icon, Image, Stack, Text, Tooltip } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import { IngredientsProps, MainProps } from "../../types/interfaces";
+import { IngredientsProps } from "../../types/interfaces";
 
 const Recipe = ({ res, setRecipe, onOpen }: any) => {
   return (
@@ -13,8 +13,8 @@ const Recipe = ({ res, setRecipe, onOpen }: any) => {
         onOpen();
       }}
     >
-      <Box height="10rem" overflow={"hidden"} borderRadius={"md"}>
-        <Image src={res.image} objectFit="cover" transition=".2s all" _hover={{ transform: "scale(1.08)" }} />
+      <Box height="10rem" overflow={"hidden"} borderRadius={"md"} objectFit="cover">
+        <Image src={res.image} alt={res.title} transition=".2s all" _hover={{ transform: "scale(1.08)" }} />
       </Box>
       <Stack padding={3}>
         <Text as="h2" fontSize={"1.2rem"} fontWeight={600}>

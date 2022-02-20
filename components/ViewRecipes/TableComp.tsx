@@ -19,8 +19,8 @@ const TableComp = ({ tableContent }: TableTypes) => {
           </Tr>
         </Thead>
         <Tbody>
-          {tableContent.map((res) => (
-            <Tr>
+          {tableContent.map((res: IngredientsProps, i: number) => (
+            <Tr key={i}>
               <Td fontSize={"1rem"}>
                 {res.name} {res.alt}
               </Td>
