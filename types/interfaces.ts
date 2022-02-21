@@ -16,8 +16,10 @@ export interface MainProps {
 //Map ingredients
 
 export interface IngredientsProps {
-  ingrediente: string;
-  cantidad: string | number;
+  ingredients: {
+    ingrediente: string;
+    cantidad: string | number;
+  };
 }
 
 //Add recipe

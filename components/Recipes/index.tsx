@@ -3,11 +3,11 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { IngredientsProps } from "../../types/interfaces";
 
 const Recipe = ({ res, setRecipe, onOpen }: any) => {
-  console.log(res);
   return (
     <Box
       cursor="pointer"
-      bg="brand.card"
+      bg="brand.cardDark"
+      color="brand.textDark"
       borderRadius={"md"}
       onClick={() => {
         setRecipe(res);
@@ -31,8 +31,8 @@ const Recipe = ({ res, setRecipe, onOpen }: any) => {
               </Text>
             </Flex>
             <Stack direction="row" spacing={1} overflow={"hidden"}>
-              {res.ingredientsArr.map((name: any, i: number) => (
-                <Badge key={i} as="small" variant={"subtle"} colorScheme="green" borderRadius={"full"}>
+              {res.ingredientsArr.map((name: IngredientsProps, i: number) => (
+                <Badge key={i} as="small" variant={"subtle"} bg="#0c4e2c" color="#a0d9be" borderRadius={"full"}>
                   {name.ingredients.ingrediente}
                 </Badge>
               ))}

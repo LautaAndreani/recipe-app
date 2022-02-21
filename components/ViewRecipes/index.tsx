@@ -5,12 +5,11 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 
 const ViewRecipes = ({ isOpen, onClose, recipe }: any) => {
   const tableContent = recipe.ingredientsArr;
-  console.log(tableContent);
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} size="sm">
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent bg="brand.navDark" color="brand.card">
         <DrawerCloseButton />
         <Box mt={10} padding={5}>
           <Box overflow={"hidden"} borderRadius="md">
@@ -19,7 +18,7 @@ const ViewRecipes = ({ isOpen, onClose, recipe }: any) => {
           <Text fontWeight={600} mt={3} fontSize="1.2rem">
             {recipe.title}
           </Text>
-          <Badge as="span" mt={2}>
+          <Badge as="span" mt={2} colorScheme="whiteAlpha">
             {recipe.category}
           </Badge>
         </Box>

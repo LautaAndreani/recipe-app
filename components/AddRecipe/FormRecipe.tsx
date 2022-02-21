@@ -38,48 +38,58 @@ const FormRecipe = ({ isOpen, onClose }: AddProps) => {
     setConfirm(true);
   };
   const handleUpdate = () => {
-    console.log(readInputs);
     //Upload Firebase
     api.upload(readInputs);
+    onClose();
   };
+
+  var button = document.getElementById("btn");
   return (
     <>
       <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset="slideInBottom" blockScrollOnMount={false}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="brand.bgDark" color="brand.card">
           <ModalHeader>🍽️ Añade tu receta </ModalHeader>
           <ModalBody>
             <form onChange={handleRead} onSubmit={handleSubmit}>
-              <Stack spacing={3}>
+              <Stack spacing={3} _placeholder={{ color: "gray" }}>
                 <Box>
-                  <FormLabel htmlFor="title">Título</FormLabel>
-                  <Input isRequired color="gray.600" fontSize={".9rem"} type="text" name="title" id="title" placeholder="Ensalada de tomate" />
+                  <FormLabel htmlFor="title" fontWeight={400}>
+                    Título
+                  </FormLabel>
+                  <Input borderColor="gray" isRequired color="lightgray" fontSize={".9rem"} type="text" name="title" id="title" placeholder="Ensalada de tomate" _placeholder={{ color: "gray" }} />
                 </Box>
                 <Box>
-                  <FormLabel htmlFor="category">Categoría</FormLabel>
-                  <SelectCategory id="category" />
+                  <FormLabel htmlFor="category" fontWeight={400}>
+                    Categoría
+                  </FormLabel>
+                  <SelectCategory id="category" isRequired />
                 </Box>
                 <Box>
-                  <FormLabel htmlFor="description">Descripción del plato</FormLabel>
-                  <Textarea color="gray.600" fontSize={".9rem"} id="description" size="lg" placeholder="Muy rico y saludable para acompañar en cualquier momento del día" />
+                  <FormLabel htmlFor="description" fontWeight={400}>
+                    Descripción del plato
+                  </FormLabel>
+                  <Textarea color="lightgray" fontSize={".9rem"} id="description" size="lg" placeholder="Muy rico y saludable para acompañar en cualquier momento del día" _placeholder={{ color: "gray" }} borderColor="gray" />
                 </Box>
                 <Box>
                   <FormControl onChange={handleIngredient}>
-                    <FormLabel htmlFor="ingredients">Ingredientes y cantidad</FormLabel>
-                    <Stack direction="row">
-                      <Input color="gray.600" placeholder="ej: manzana" fontSize={".9rem"} type="text" id="ingredients" name="ingrediente" />
+                    <FormLabel htmlFor="ingredients" fontWeight={400}>
+                      Ingredientes y cantidad
+                    </FormLabel>
+                    <Stack direction="row" color="lightgray">
+                      <Input color="lightgray" borderColor="gray" placeholder="ej: manzana" _placeholder={{ color: "gray" }} fontSize={".9rem"} type="text" id="ingredients" name="ingrediente" />
                       <Box>
-                        <Input type="number" min={0} id="cantidad" name="cantidad" placeholder="1" />
+                        <Input type="number" borderColor="gray" min={0} id="cantidad" name="cantidad" placeholder="1" _placeholder={{ color: "gray" }} />
                       </Box>
-                      <Button variant="outline" onClick={handleAddIngredient}>
-                        <Icon color="brand.primary" as={AiOutlinePlus} />
+                      <Button variant="outline" borderColor="gray" _hover={{}} onClick={handleAddIngredient}>
+                        <Icon color="green.100" as={AiOutlinePlus} />
                       </Button>
                     </Stack>
                   </FormControl>
                   {ingredientsArr.length >= 1 &&
                     ingredientsArr.map((ing: any, i: number) => (
                       <MotionBoxes key={i}>
-                        <Stack m={2} direction="row" justifyContent={"space-between"}>
+                        <Stack mt={4} direction="row" justifyContent={"space-between"}>
                           <Text as="small">{ing.ingredients.ingrediente}</Text>
                           <Badge colorScheme={"green"} padding={1} minWidth="2rem" textAlign={"center"} borderRadius="md">
                             {ing.ingredients.cantidad}
@@ -89,12 +99,14 @@ const FormRecipe = ({ isOpen, onClose }: AddProps) => {
                     ))}
                 </Box>
                 <Box>
-                  <FormLabel htmlFor="time">Tiempo de preparación</FormLabel>
+                  <FormLabel htmlFor="time" fontWeight={400}>
+                    Tiempo de preparación
+                  </FormLabel>
                   <InputGroup>
                     <InputLeftElement>
-                      <Icon as={HiClock} color="brand.primary" />
+                      <Icon as={HiClock} color="green.100" />
                     </InputLeftElement>
-                    <Input isRequired type="text" color="gray.600" placeholder="30min" fontSize={".9rem"} id="time" />
+                    <Input isRequired type="text" color="lightgray" placeholder="30min" _placeholder={{ color: "gray" }} fontSize={".9rem"} id="time" borderColor="gray" />
                   </InputGroup>
                 </Box>
                 <Button bg="brand.primary" color="brand.secondary" _hover={{}} type="submit" width="100%" mt={2}>

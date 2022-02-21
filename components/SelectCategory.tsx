@@ -4,11 +4,11 @@ const SelectCategory = ({ ...res }: any) => {
   const filterContent: string[] = ["🍪 desayuno", " 🍕 almuerzo", " 🍵 merienda", "🌙 cena"];
   return (
     <Stack direction="row">
-      <Select fontWeight={500} bg="brand.nav" placeholder="Selecciona una opción" width={"100%"} {...res} id="category">
+      <Select fontWeight={500} bg="brand.navDark" width={"100%"} {...res} id="category" borderColor="gray">
         {filterContent.map((opt: string, i: number) => (
-          <Box as="option" value={opt} key={i}>
+          <option style={{ backgroundColor: "#222526" }} value={opt} key={i}>
             {opt}
-          </Box>
+          </option>
         ))}
       </Select>
     </Stack>
