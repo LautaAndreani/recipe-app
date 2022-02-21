@@ -7,7 +7,6 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { HiClock } from "react-icons/hi";
 import api from "../../api";
 import MotionBoxes from "../../ui/MotionBox";
-import { setTimeout } from "timers/promises";
 import { nanoid } from "nanoid";
 
 const FormRecipe = ({ isOpen, onClose }: AddProps) => {

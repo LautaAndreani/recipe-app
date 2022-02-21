@@ -3,7 +3,6 @@ import type { GetStaticProps, NextPage } from "next";
 import NavBar from "../ui/NavBar";
 import Filter from "../ui/Filter";
 import MainContent from "../ui/MainContent";
-import mock from "../mock";
 import AddRecipe from "../components/AddRecipe/AddRecipe";
 import ViewRecipes from "../components/ViewRecipes";
 import { MainProps } from "../types/interfaces";

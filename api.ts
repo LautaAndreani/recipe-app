@@ -1,5 +1,5 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import db from "./FirebaseClient";
+import db from "./firebaseClient";
 
 export default {
   recipes: async () => {
