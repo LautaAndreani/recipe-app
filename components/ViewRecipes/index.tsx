@@ -4,7 +4,8 @@ import { Badge, Box, Drawer, DrawerCloseButton, DrawerContent, DrawerOverlay, Ic
 import { AiOutlineClockCircle } from "react-icons/ai";
 
 const ViewRecipes = ({ isOpen, onClose, recipe }: any) => {
-  const tableContent = recipe.ingredients;
+  const tableContent = recipe.ingredientsArr;
+  console.log(tableContent);
 
   return (
     <Drawer isOpen={isOpen} onClose={onClose} size="sm">
@@ -13,16 +14,19 @@ const ViewRecipes = ({ isOpen, onClose, recipe }: any) => {
         <DrawerCloseButton />
         <Box mt={10} padding={5}>
           <Box overflow={"hidden"} borderRadius="md">
-            <Image src={recipe.image} alt={recipe.title} objectFit="cover" width={"100%"} height="10rem" transition=".2s all" _hover={{ transform: "scale(1.1)" }} />
+            <Image src={"https://images.unsplash.com/photo-1495461199391-8c39ab674295?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"} alt={recipe.title} objectFit="cover" width={"100%"} height="10rem" transition=".2s all" _hover={{ transform: "scale(1.1)" }} />
           </Box>
           <Text fontWeight={600} mt={3} fontSize="1.2rem">
             {recipe.title}
           </Text>
+          <Badge as="span" mt={2}>
+            {recipe.category}
+          </Badge>
         </Box>
         <Stack bg="brand.primary" padding={5} lineHeight="1.5" fontSize=".9rem" fontWeight={300} color="white" width="100%" height="100vh">
           <Text>{recipe.description}</Text>
           <Text as="h3" fontSize="1.3rem" fontWeight={500} padding={2}>
-            Ingredientes
+            Ingredientes 🥣
           </Text>
           <TableComp tableContent={tableContent} />
           <Text as="h3" fontSize="1.3rem" fontWeight={500} padding={2}>

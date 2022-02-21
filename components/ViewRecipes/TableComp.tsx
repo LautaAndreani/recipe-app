@@ -19,12 +19,10 @@ const TableComp = ({ tableContent }: TableTypes) => {
           </Tr>
         </Thead>
         <Tbody>
-          {tableContent.map((res: IngredientsProps, i: number) => (
+          {tableContent.map((res: any, i: number) => (
             <Tr key={i}>
-              <Td fontSize={"1rem"}>
-                {res.name} {res.alt}
-              </Td>
-              <Td>{res.cantidad}</Td>
+              <Td fontSize={"1rem"}>{res.ingredients.ingrediente}</Td>
+              <Td>{res.ingredients.cantidad}</Td>
             </Tr>
           ))}
         </Tbody>

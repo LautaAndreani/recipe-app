@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { AddProps } from "../../types/interfaces";
-import api from "../../api";
 import SelectCategory from "../SelectCategory";
 
-import { Badge, Box, Button, FormControl, FormLabel, Icon, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, Text, Textarea } from "@chakra-ui/react";
+import { Badge, Box, Button, FormControl, FormLabel, Icon, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Stack, Text, Textarea } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { HiClock } from "react-icons/hi";
+import api from "../../api";
+import MotionBoxes from "../../ui/MotionBox";
+import { setTimeout } from "timers/promises";
+import { nanoid } from "nanoid";
 
 const FormRecipe = ({ isOpen, onClose }: AddProps) => {
   const [readInputs, setReadInputs] = useState({});
   const [ingredients, setIngredients] = useState({});
-  const [quantity, setQuantity] = useState<Number>(0);
   const [ingredientsArr, setIngredientsArr] = useState<any>([]);
-  // const [sendForm, setSendForm] = useState<any>([]);
+  const [confirm, setConfirm] = useState<Boolean>(false);
 
   const handleRead = (e: any) => {
     if (e.target.id === "ingredients" || e.target.id === "cantidad") return;
@@ -19,17 +22,26 @@ const FormRecipe = ({ isOpen, onClose }: AddProps) => {
       ...readInputs,
       [e.target.id]: e.target.value,
     });
+    setConfirm(false);
   };
-  const handleIngredient = () => {
-    setIngredientsArr([{ quantity, ingrediente: ingredients }]);
-    setReadInputs({ ...readInputs, ingredientsArr });
+  const handleIngredient = (e: any) => {
+    setIngredients({ ...ingredients, [e.target.name]: e.target.value });
+    setConfirm(false);
   };
+
+  const handleAddIngredient = () => {
+    setIngredientsArr([...ingredientsArr, { ingredients }]);
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(ingredientsArr);
+    setReadInputs({ ...readInputs, ingredientsArr, id: nanoid() });
+    setConfirm(true);
+  };
+  const handleUpdate = () => {
     console.log(readInputs);
-
-    // api.upload(readInputs);
+    //Upload Firebase
+    api.upload(readInputs);
   };
   return (
     <>
@@ -42,7 +54,7 @@ const FormRecipe = ({ isOpen, onClose }: AddProps) => {
               <Stack spacing={3}>
                 <Box>
                   <FormLabel htmlFor="title">Título</FormLabel>
-                  <Input color="gray.600" fontSize={".9rem"} type="text" name="title" id="title" placeholder="Ensalada de tomate" />
+                  <Input isRequired color="gray.600" fontSize={".9rem"} type="text" name="title" id="title" placeholder="Ensalada de tomate" />
                 </Box>
                 <Box>
                   <FormLabel htmlFor="category">Categoría</FormLabel>
@@ -53,39 +65,58 @@ const FormRecipe = ({ isOpen, onClose }: AddProps) => {
                   <Textarea color="gray.600" fontSize={".9rem"} id="description" size="lg" placeholder="Muy rico y saludable para acompañar en cualquier momento del día" />
                 </Box>
                 <Box>
-                  <FormLabel htmlFor="ingredients">Ingredientes y cantidad</FormLabel>
-                  <Stack direction="row">
-                    <Input color="gray.600" onChange={(e) => setIngredients(e.target.value)} placeholder="ej: manzana" fontSize={".9rem"} type="text" id="ingredients" />
-                    <Box>
-                      <NumberInput defaultValue={0} min={0} id="cantidad" onChange={(e) => setQuantity(Number(e))}>
-                        <NumberInputField />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </Box>
-                    <Button variant="outline" onClick={handleIngredient}>
-                      <Icon color="brand.primary" as={AiOutlinePlus} />
-                    </Button>
-                  </Stack>
-                  {ingredientsArr &&
+                  <FormControl onChange={handleIngredient}>
+                    <FormLabel htmlFor="ingredients">Ingredientes y cantidad</FormLabel>
+                    <Stack direction="row">
+                      <Input color="gray.600" placeholder="ej: manzana" fontSize={".9rem"} type="text" id="ingredients" name="ingrediente" />
+                      <Box>
+                        <Input type="number" min={0} id="cantidad" name="cantidad" placeholder="1" />
+                      </Box>
+                      <Button variant="outline" onClick={handleAddIngredient}>
+                        <Icon color="brand.primary" as={AiOutlinePlus} />
+                      </Button>
+                    </Stack>
+                  </FormControl>
+                  {ingredientsArr.length >= 1 &&
                     ingredientsArr.map((ing: any, i: number) => (
-                      <Stack key={i} m={2} direction="row" justifyContent={"space-between"}>
-                        <Text as="small">{ing.ingrediente}</Text>
-                        <Badge colorScheme={"green"} padding={1} minWidth="2rem" textAlign={"center"}>
-                          {ing.quantity}
-                        </Badge>
-                      </Stack>
+                      <MotionBoxes key={i}>
+                        <Stack m={2} direction="row" justifyContent={"space-between"}>
+                          <Text as="small">{ing.ingredients.ingrediente}</Text>
+                          <Badge colorScheme={"green"} padding={1} minWidth="2rem" textAlign={"center"} borderRadius="md">
+                            {ing.ingredients.cantidad}
+                          </Badge>
+                        </Stack>
+                      </MotionBoxes>
                     ))}
                 </Box>
                 <Box>
                   <FormLabel htmlFor="time">Tiempo de preparación</FormLabel>
-                  <Input type="text" color="gray.600" placeholder="30min" fontSize={".9rem"} id="time" />
+                  <InputGroup>
+                    <InputLeftElement>
+                      <Icon as={HiClock} color="brand.primary" />
+                    </InputLeftElement>
+                    <Input isRequired type="text" color="gray.600" placeholder="30min" fontSize={".9rem"} id="time" />
+                  </InputGroup>
                 </Box>
                 <Button bg="brand.primary" color="brand.secondary" _hover={{}} type="submit" width="100%" mt={2}>
                   Enviar
                 </Button>
+                {confirm && (
+                  <MotionBoxes>
+                    <Stack>
+                      {" "}
+                      <Text>¿Confirmar envío?</Text>
+                      <Stack direction="row" w="100%">
+                        <Button variant="ghost" width="50%" colorScheme="gray" onClick={() => setConfirm(false)}>
+                          Revisar campos
+                        </Button>
+                        <Button autoFocus variant="solid" bg="brand.primary" color="white" _hover={{ bg: "#377B69" }} width="50%" onClick={handleUpdate}>
+                          Si
+                        </Button>
+                      </Stack>
+                    </Stack>
+                  </MotionBoxes>
+                )}
               </Stack>
             </form>
           </ModalBody>

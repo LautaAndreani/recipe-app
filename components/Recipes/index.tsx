@@ -3,6 +3,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { IngredientsProps } from "../../types/interfaces";
 
 const Recipe = ({ res, setRecipe, onOpen }: any) => {
+  console.log(res);
   return (
     <Box
       cursor="pointer"
@@ -14,7 +15,7 @@ const Recipe = ({ res, setRecipe, onOpen }: any) => {
       }}
     >
       <Box height="10rem" overflow={"hidden"} borderRadius={"md"} objectFit="cover">
-        <Image src={res.image} alt={res.title} transition=".2s all" _hover={{ transform: "scale(1.08)" }} />
+        <Image src={"https://images.unsplash.com/photo-1495461199391-8c39ab674295?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"} alt={res.title} transition=".2s all" _hover={{ transform: "scale(1.08)" }} />
       </Box>
       <Stack padding={3}>
         <Text as="h2" fontSize={"1.2rem"} fontWeight={600}>
@@ -29,13 +30,11 @@ const Recipe = ({ res, setRecipe, onOpen }: any) => {
                 {res.time}
               </Text>
             </Flex>
-            <Stack direction="row" spacing={1}>
-              {res.ingredients.map((name: IngredientsProps, i: number) => (
-                <Tooltip label={name.alt} aria-label="a tooltip" key={i}>
-                  <Badge variant={"subtle"} colorScheme="green" fontSize={"1rem"} borderRadius={"full"}>
-                    {name.name}
-                  </Badge>
-                </Tooltip>
+            <Stack direction="row" spacing={1} overflow={"hidden"}>
+              {res.ingredientsArr.map((name: any, i: number) => (
+                <Badge key={i} as="small" variant={"subtle"} colorScheme="green" borderRadius={"full"}>
+                  {name.ingredients.ingrediente}
+                </Badge>
               ))}
             </Stack>
           </Stack>

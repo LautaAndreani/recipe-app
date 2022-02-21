@@ -12,8 +12,6 @@ import api from "../api";
 import { Box, useDisclosure } from "@chakra-ui/react";
 
 const Home: NextPage = ({ data }: any) => {
-  // console.log(data);
-
   React.useLayoutEffect = React.useEffect;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [recipe, setRecipe] = useState<MainProps>();
@@ -22,7 +20,7 @@ const Home: NextPage = ({ data }: any) => {
     <Box as="main" height="98vh" width="100%">
       <NavBar />
       <Filter />
-      <MainContent mock={mock} setRecipe={setRecipe} onOpen={onOpen} />
+      <MainContent data={data} setRecipe={setRecipe} onOpen={onOpen} />
       <AddRecipe />
       {recipe && <ViewRecipes isOpen={isOpen} onClose={onClose} recipe={recipe} />}
     </Box>
@@ -31,9 +29,9 @@ const Home: NextPage = ({ data }: any) => {
 
 export default Home;
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const data = await api.recipes();
-//   return {
-//     props: { data },
-//   };
-// };
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await api.recipes();
+  return {
+    props: { data },
+  };
+};

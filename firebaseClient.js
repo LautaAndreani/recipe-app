@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDOdGha_ruL2jem31eGw5YTGCQvDmg9jLE",
-  authDomain: "recipes-app-534d3.firebaseapp.com",
-  projectId: "recipes-app-534d3",
-  storageBucket: "recipes-app-534d3.appspot.com",
-  messagingSenderId: "494665642015",
-  appId: "1:494665642015:web:938f4ffd49c0cd3aa8252a",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
 };
 
 // Initialize Firebase

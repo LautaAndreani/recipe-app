@@ -1,6 +1,5 @@
 interface Ingredients {
-  name: string;
-  alt: string;
+  ingrediente: string;
   cantidad: number | string;
 }
 
@@ -9,15 +8,15 @@ export interface MainProps {
   description: string;
   image: string;
   time: string;
-  id: number;
+  id: string;
+  category: string;
   ingredients: Ingredients[];
 }
 
 //Map ingredients
 
 export interface IngredientsProps {
-  name: string;
-  alt: string;
+  ingrediente: string;
   cantidad: string | number;
 }
 
