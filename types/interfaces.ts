@@ -22,8 +22,14 @@ export interface IngredientsProps {
   };
 }
 
+export interface BooleanProps {
+  isUpdate: Boolean;
+  setIsUpdate: React.Dispatch<React.SetStateAction<Boolean>>;
+}
 //Add recipe
 export interface AddProps {
   onClose: () => void;
   isOpen: boolean;
+  isUpdate: Boolean;
+  setIsUpdate: React.Dispatch<React.SetStateAction<Boolean>>;
 }

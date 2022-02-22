@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import db from "./firebaseClient";
 

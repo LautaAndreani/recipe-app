@@ -17,10 +17,10 @@ const ViewRecipes = ({ isOpen, onClose, recipe }: any) => {
           </Box>
           <Text fontWeight={600} mt={3} fontSize="1.2rem">
             {recipe.title}
+            <Badge as="span" ml={2} colorScheme="whiteAlpha">
+              {recipe.category}
+            </Badge>
           </Text>
-          <Badge as="span" mt={2} colorScheme="whiteAlpha">
-            {recipe.category}
-          </Badge>
         </Box>
         <Stack bg="brand.primary" padding={5} lineHeight="1.5" fontSize=".9rem" fontWeight={300} color="white" width="100%" height="100vh">
           <Text>{recipe.description}</Text>

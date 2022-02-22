@@ -9,7 +9,7 @@ import api from "../../api";
 import MotionBoxes from "../../ui/MotionBox";
 import { nanoid } from "nanoid";
 
-const FormRecipe = ({ isOpen, onClose }: AddProps) => {
+const FormRecipe = ({ isOpen, onClose, setIsUpdate, isUpdate }: AddProps) => {
   const [readInputs, setReadInputs] = useState({});
   const [ingredients, setIngredients] = useState({});
   const [ingredientsArr, setIngredientsArr] = useState<any>([]);
@@ -41,6 +41,7 @@ const FormRecipe = ({ isOpen, onClose }: AddProps) => {
     //Upload Firebase
     api.upload(readInputs);
     onClose();
+    setIsUpdate(!isUpdate);
   };
 
   var button = document.getElementById("btn");
