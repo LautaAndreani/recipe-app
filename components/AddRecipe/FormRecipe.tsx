@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { AddProps } from "../../types/interfaces";
 import SelectCategory from "../SelectCategory";
 
@@ -14,6 +14,7 @@ const FormRecipe = ({ isOpen, onClose, setIsUpdate, isUpdate }: AddProps) => {
   const [ingredients, setIngredients] = useState({});
   const [ingredientsArr, setIngredientsArr] = useState<any>([]);
   const [confirm, setConfirm] = useState<Boolean>(false);
+  const inputRef = useRef<any>(null);
 
   const handleRead = (e: any) => {
     if (e.target.id === "ingredients" || e.target.id === "cantidad") return;
@@ -30,6 +31,8 @@ const FormRecipe = ({ isOpen, onClose, setIsUpdate, isUpdate }: AddProps) => {
 
   const handleAddIngredient = () => {
     setIngredientsArr([...ingredientsArr, { ingredients }]);
+    inputRef.current.focus();
+    inputRef.current.value = "";
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,6 +40,7 @@ const FormRecipe = ({ isOpen, onClose, setIsUpdate, isUpdate }: AddProps) => {
     setReadInputs({ ...readInputs, ingredientsArr, id: nanoid() });
     setConfirm(true);
   };
+
   const handleUpdate = () => {
     //Upload Firebase
     api.upload(readInputs);
@@ -44,7 +48,6 @@ const FormRecipe = ({ isOpen, onClose, setIsUpdate, isUpdate }: AddProps) => {
     setIsUpdate(!isUpdate);
   };
 
-  var button = document.getElementById("btn");
   return (
     <>
       <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset="slideInBottom" blockScrollOnMount={false}>
@@ -78,7 +81,7 @@ const FormRecipe = ({ isOpen, onClose, setIsUpdate, isUpdate }: AddProps) => {
                       Ingredientes y cantidad
                     </FormLabel>
                     <Stack direction="row" color="lightgray">
-                      <Input color="lightgray" borderColor="gray" placeholder="ej: manzana" _placeholder={{ color: "gray" }} fontSize={".9rem"} type="text" id="ingredients" name="ingrediente" />
+                      <Input color="lightgray" borderColor="gray" placeholder="ej: manzana" _placeholder={{ color: "gray" }} fontSize={".9rem"} type="text" id="ingredients" name="ingrediente" ref={inputRef} />
                       <Box>
                         <Input type="number" borderColor="gray" min={0} id="cantidad" name="cantidad" placeholder="1" _placeholder={{ color: "gray" }} />
                       </Box>

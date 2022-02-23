@@ -3,7 +3,7 @@ import React from "react";
 import { BsFilter } from "react-icons/bs";
 import { Box, Center, Icon, Select, Stack, Button } from "@chakra-ui/react";
 
-const filterContent: string[] = ["🍪 desayuno", " 🍕 almuerzo", " 🍵 merienda", "🌙 cena"];
+const filterContent: string[] = ["🍪 desayuno", " 🍕 almuerzo", " 🍵 merienda", "🌙 cena", "☀️ es indistinto"];
 
 const Filter = () => {
   return (
