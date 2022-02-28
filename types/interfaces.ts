@@ -33,3 +33,13 @@ export interface AddProps {
   isUpdate: Boolean;
   setIsUpdate: React.Dispatch<React.SetStateAction<Boolean>>;
 }
+
+//Firebase Data
+export interface FirebaseProps {
+  title: string;
+  description: string;
+  time: string;
+  id: string;
+  category: string;
+  ingredientsArr: Ingredients[];
+}

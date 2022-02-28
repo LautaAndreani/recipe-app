@@ -5,12 +5,15 @@ import Filter from "../ui/Filter";
 import MainContent from "../ui/MainContent";
 import AddRecipe from "../components/AddRecipe/AddRecipe";
 import ViewRecipes from "../components/ViewRecipes";
-import { MainProps } from "../types/interfaces";
+import { FirebaseProps, MainProps } from "../types/interfaces";
 import api from "../api";
+interface dataProps {
+  data: FirebaseProps[];
+}
 
 import { Box, useDisclosure } from "@chakra-ui/react";
 
-const Home: NextPage = ({ data }: any) => {
+const Home: NextPage<dataProps> = ({ data }) => {
   React.useLayoutEffect = React.useEffect;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [recipe, setRecipe] = useState<MainProps>();
@@ -30,7 +33,7 @@ const Home: NextPage = ({ data }: any) => {
   return (
     <Box as="main" height="98vh" width="100%">
       <NavBar />
-      <Filter />
+      <Filter isUpdate={isUpdate} />
       <MainContent reload={reload} data={data} setRecipe={setRecipe} onOpen={onOpen} />
       <AddRecipe setIsUpdate={setIsUpdate} isUpdate={isUpdate} />
       {recipe && <ViewRecipes isOpen={isOpen} onClose={onClose} recipe={recipe} />}

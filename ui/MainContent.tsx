@@ -1,9 +1,9 @@
 import { Grid, Stack, Text } from "@chakra-ui/react";
 import Recipe from "../components/Recipes";
-import { MainProps } from "../types/interfaces";
+import { FirebaseProps, MainProps } from "../types/interfaces";
 
 interface Props {
-  data: MainProps[];
+  data: FirebaseProps[];
   reload: MainProps[];
   setRecipe: any;
   onOpen: any;
