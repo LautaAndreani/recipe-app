@@ -1,19 +1,14 @@
 import { Badge, Box, Center, Divider, Flex, Icon, Image, Stack, Text, Tooltip } from "@chakra-ui/react";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import { IngredientsProps } from "../../types/interfaces";
+import { IngredientsProps, MainProps } from "../../types/interfaces";
 
 const Recipe = ({ res, setRecipe, onOpen }: any) => {
+  const handleOpen = (res:MainProps) => {
+    setRecipe(res);
+    onOpen();
+  }
   return (
-    <Box
-      cursor="pointer"
-      bg="brand.cardDark"
-      color="brand.textDark"
-      borderRadius={"md"}
-      onClick={() => {
-        setRecipe(res);
-        onOpen();
-      }}
-    >
+    <Box cursor="pointer" bg="brand.cardDark" color="brand.textDark" borderRadius={"md"} onClick={() => handleOpen(res)}>
       <Box height="10rem" overflow={"hidden"} borderRadius={"md"} objectFit="cover">
         <Image src={"https://images.unsplash.com/photo-1495461199391-8c39ab674295?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"} alt={res.title} transition=".2s all" _hover={{ transform: "scale(1.08)" }} />
       </Box>
