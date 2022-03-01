@@ -43,3 +43,8 @@ export interface FirebaseProps {
   category: string;
   ingredientsArr: Ingredients[];
 }
+
+export interface Links {
+  route: string,
+  text: string,
+}

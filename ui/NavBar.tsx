@@ -1,7 +1,10 @@
-import React from "react";
 import { Box, Input, InputGroup, Stack, Text, InputLeftElement } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
+
 import Link from "next/link";
+import { Links } from "../types/interfaces";
+
+const links:Links[] = [{text: "Inicio", route:"/" },{text: "Recetas", route:"/" }, {text: "Mis favoritos", route:"/favorites" }]
 
 const NavBar = () => {
   return (
@@ -11,15 +14,10 @@ const NavBar = () => {
           RecipesAPP
         </Text>
         <Stack direction="row" fontWeight={500} spacing={5}>
-          <Link href="/">
-            <a>Inicio</a>
-          </Link>
-          <Link href="/">
-            <a>Recetas</a>
-          </Link>
-          <Link href="/">
-            <a>Mis Favoritos</a>
-          </Link>
+          {links.map((link:Links, i:number) => 
+          <Link key={i} href={link.route}>
+            <Box as="a" cursor="pointer" _hover={{color:"brand.secondary"}}>{link.text}</Box>
+          </Link>)}
         </Stack>
       </Stack>
       <Stack>

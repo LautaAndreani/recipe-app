@@ -18,7 +18,7 @@ export default {
       const docRef = await addDoc(collection(db, "recipe"), recipes);
       console.log("Your upload it's succesfully");
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("Error ❌");
     }
   },
 };

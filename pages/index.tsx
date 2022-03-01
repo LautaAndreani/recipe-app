@@ -10,20 +10,21 @@ import api from "../api";
 
 interface dataProps {
   data: FirebaseProps[],
+  favorite : FirebaseProps[],
+  setFavorite: React.Dispatch<React.SetStateAction<FirebaseProps[]>>,
 }
 
 import { Box, useDisclosure } from "@chakra-ui/react";
 
-const Home: NextPage<dataProps> = ({ data }) => {
-  React.useLayoutEffect = React.useEffect;
+const Home: NextPage<dataProps> = ({ data, favorite, setFavorite }) => {
+  // React.useLayoutEffect = React.useEffect;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [getDataFirebase, setGetDataFirebase] = useState<any>(data)
   const [recipe, setRecipe] = useState<MainProps>();
   const [reload, setReload] = useState<any>();
   const [isUpdate, setIsUpdate] = useState<Boolean>(false);
-  const [favorite, setFavorite] = useState<any>([])
 
-
+  //Filter recipes
   const filterRecipes = (value: string) => {
     if(value === "🍽 todos"){
       setGetDataFirebase(data)
@@ -32,9 +33,9 @@ const Home: NextPage<dataProps> = ({ data }) => {
     const newItems = getDataFirebase.filter((res:FirebaseProps) => res.category === value)
     setGetDataFirebase(newItems)
   }
+  //Add to favorite
   const favoriteRecipe = (val:any) => {
     setFavorite(favorite.concat(val))
-    console.log(favorite);
   }
 
   // const getData = async () => {
@@ -54,7 +55,7 @@ const Home: NextPage<dataProps> = ({ data }) => {
       <Filter filterRecipes={filterRecipes}/>
       <MainContent reload={reload} getDataFirebase={getDataFirebase} setRecipe={setRecipe} onOpen={onOpen} />
       <AddRecipe setIsUpdate={setIsUpdate} isUpdate={isUpdate} />
-      {recipe && <ViewRecipes isOpen={isOpen} onClose={onClose} recipe={recipe} favoriteRecipe={favoriteRecipe}/>}
+      {recipe && <ViewRecipes isOpen={isOpen} recipe={recipe} onClose={onClose} favoriteRecipe={favoriteRecipe}/>}
     </Box>
   );
 };
